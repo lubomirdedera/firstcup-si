@@ -2,13 +2,12 @@
 
     <!-- Enable features -->
     <featureManager>
+        <feature>ejbLite-3.2</feature>
+        <feature>jaxrs-2.0</feature>
+        <feature>jpa-2.1</feature>
+        <feature>jsf-2.2</feature>
+        <feature>jsp-2.3</feature>
         <feature>localConnector-1.0</feature>
-    	<feature>jaxrs-2.0</feature>
-		<feature>ejbLite-3.2</feature>
-		<feature>jpa-2.1</feature>
-		<feature>jsf-2.2</feature>
-		<feature>jsp-2.3</feature>
-	    <feature>cdi-1.2</feature>
     </featureManager>
 
     <!-- To access this server from a remote client add a host attribute to the following element, e.g. host="*" -->
@@ -17,27 +16,18 @@
     <!-- Automatically expand WAR files and EAR files -->
     <applicationManager autoExpand="true"/>
 
-	<dataSource id="MyDB" jndiName="jdbc/MyDB">
-    	<jdbcDriver libraryRef="DerbyLib"/>
-    	<properties.derby.embedded createDatabase="create" databaseName="C:/Users/dedera/MyDB"/>
-	</dataSource>
+    <applicationMonitor updateTrigger="mbean"/>
 
+	<!-- Prístup na databázu - cestu treba upraviť -->
 	<dataSource id="FirstCup" jndiName="jdbc/FirstCupDB">
     	<jdbcDriver libraryRef="DerbyLib"/>
     	<properties.derby.embedded createDatabase="create" databaseName="C:/Users/dedera/FirstCupDB"/>
 	</dataSource>
-
-	<dataSource id="kniznicaDB" jndiName="jdbc/kniznicaDB">
-    	<jdbcDriver libraryRef="DerbyLib"/>
-    	<properties.derby.embedded createDatabase="create" databaseName="C:/Users/dedera/kniznicaDB"/>
-	</dataSource>
-
+	
+	<!-- Prístup ku knižnici s ovládačom databázy - cestu treba skontrolovať/upraviť -->
 	<library id="DerbyLib">
-    	<fileset dir="C:\Program Files\IBM\IMShared\plugins"/>
+		<file name="C:\Program Files\IBM\IBMIMShared\plugins\org.apache.derby.core_10.5.1.1_v201501121639\derby.jar" />
 	</library>
 
-    <applicationMonitor updateTrigger="mbean"/>
-
-    <enterpriseApplication id="firstcupEAR" location="firstcupEAR.ear" name="firstcupEAR"/>
-
+	<enterpriseApplication id="firstcupEAR" location="firstcupEAR.ear" name="firstcupEAR"/>
 </server>
